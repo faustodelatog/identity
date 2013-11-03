@@ -11,12 +11,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * @author faustodelatog
  * 
  */
 @Entity
+@Table(name = "T_Grant")
 public class Grant implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -31,7 +33,7 @@ public class Grant implements Serializable {
 	private Role role;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "role_id")
+	@JoinColumn(name = "user_organization_id")
 	private UserOrganization userOrganization;
 
 	public Long getId() {

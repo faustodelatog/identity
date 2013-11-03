@@ -1,0 +1,18 @@
+
+                <datasource jta="true" jndi-name="java:jboss/datasources/identityDS" pool-name="java:jboss/datasources/identityDS_Pool">
+                    <connection-url>jdbc:mysql://localhost:3306/identityDB</connection-url>
+                    <driver-class>com.mysql.jdbc.Driver</driver-class>
+                    <driver>mysql-driver</driver>
+                    <pool>
+                        <min-pool-size>2</min-pool-size>
+                        <max-pool-size>20</max-pool-size>
+                        <prefill>true</prefill>
+                    </pool>
+                    <security>
+                        <user-name>root</user-name>
+                        <password></password>
+                    </security>
+                    <validation>
+                        <check-valid-connection-sql>SELECT 1</check-valid-connection-sql>
+                    </validation>
+                </datasource>

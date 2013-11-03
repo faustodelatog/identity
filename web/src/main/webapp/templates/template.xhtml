@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<title>
+			<ui:insert name="title" />
+		</title>
+		<meta charset="UTF-8" />
+		<link type="image/x-icon" rel="shortcut icon" href="/resources/img/favicon.ico" />
+		
+		<script type="text/javascript">
+			window.onload = function () {
+				if (typeof history.pushState === "function") {
+					history.pushState("", null, null);
+					window.onpopstate = function () {
+						history.pushState('', null, null);
+					};
+				} else {
+					var ignoreHashChange = true;
+					window.onhashchange = function () {
+						if (!ignoreHashChange) {
+							ignoreHashChange = true;
+							window.location.hash = Math.random();
+						}
+						else {
+							ignoreHashChange = false;
+						}
+					};
+				}
+			}
+		</script>
+	</h:head>
+	
+	<ui:insert name="content">
+		Contenido
+	</ui:insert>
+
+</ui:composition>
