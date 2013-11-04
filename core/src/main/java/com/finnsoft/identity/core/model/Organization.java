@@ -81,7 +81,7 @@ public class Organization implements Serializable {
 
 	private String builParentsString(Organization o) {
 		if (o == null) {
-			return "";
+			return " > ";
 		}
 		return builParentsString(o.getParent()) + " > " + o.getName();
 	}
