@@ -3,11 +3,13 @@
  */
 package com.finnsoft.identity.core.service;
 
+import java.util.List;
+
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import com.finnsoft.identity.core.model.Organization;
+import com.finnsoft.identity.core.model.eao.GenericEao;
 
 /**
  * @author faustodelatog
@@ -16,10 +18,23 @@ import com.finnsoft.identity.core.model.Organization;
 @Stateless
 public class Organizations {
 
-	@PersistenceContext
-	protected EntityManager em;
+	@EJB
+	private GenericEao<Organization> organizationEao;
 
-	public void create(Organization o) {
-		em.persist(o);
+	public void save(Organization o) {
+		if (o.getId() == null) {
+			organizationEao.persist(o);
+		} else {
+			organizationEao.merge(o);
+		}
+	}
+
+	public List<Organization> findByParent(Long parentId) {
+		if (parentId == null) {
+			return organizationEao.getResultListFromNamedQuery(
+					Organization.class, "Organization.findParents");
+		}
+		return organizationEao.getResultListFromNamedQuery(Organization.class,
+				"Organization.findByParent", parentId);
 	}
 }
