@@ -10,6 +10,7 @@
 		<meta charset="UTF-8" />
 		<link type="image/x-icon" rel="shortcut icon"
 			href="/resources/img/favicon.ico" />
+		<h:outputStylesheet library="css" name="default.css" />
 
 		<script type="text/javascript">
 			window.onload = function () {
@@ -36,6 +37,7 @@
 	<h:body>
 
 		<p:growl id="growl" showDetail="true" sticky="true" />
+		<p:messages autoUpdate="true" />
 
 		<p:ajaxStatus onstart="state.show();" onsuccess="state.hide();" />
 		<p:dialog modal="true" widgetVar="state" draggable="false"

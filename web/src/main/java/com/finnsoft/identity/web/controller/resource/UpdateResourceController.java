@@ -57,17 +57,17 @@ public class UpdateResourceController extends BaseController implements
 
 	public String save() {
 		resources.save(updateResource);
-		FacesMessageHelper.addInfo(String.format("Recurso modificado [%s]",
-				updateResource));
+		FacesMessageHelper.addInfo(String.format("Recurso modificado: %s",
+				updateResource.getName()));
 		return "/pages/resource/list?faces-redirect=true";
 	}
 
-	public Resource getNewResourceBean() {
+	public Resource getUpdateResource() {
 		return updateResource;
 	}
 
-	public void setNewResourceBean(Resource newResourceBean) {
-		this.updateResource = newResourceBean;
+	public void setUpdateResource(Resource updateResource) {
+		this.updateResource = updateResource;
 	}
 
 }

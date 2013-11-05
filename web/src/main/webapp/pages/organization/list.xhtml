@@ -5,45 +5,30 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
 
-	<ui:define name="title">Administracion de Organizaciones</ui:define>
+	<ui:define name="title">Listado de Organizaciones</ui:define>
 	<ui:define name="content">
 		<h:form id="form">
 			<p:contextMenu for="tree">
 				<p:menuitem value="Agregar"
-					action="#{updateOrganizationsBean.addOrganization()}"
-					oncomplete="PF('organizationDialog').show();"
-					update=":form:organizationForm" />
+					action="#{listOrganizationController.newOrganization()}" />
 				<p:menuitem value="Editar"
-					action="#{updateOrganizationsBean.assignToModify()}"
-					oncomplete="PF('organizationDialog').show();"
-					update=":form:organizationForm" />
+					action="#{listOrganizationController.updateOrganization()}" />
 			</p:contextMenu>
 
-			<p:tree value="#{updateOrganizationsBean.root}" var="o" id="tree"
+			<p:tree value="#{listOrganizationController.root}" var="o" id="tree"
 				selectionMode="single" 
-				selection="#{updateOrganizationsBean.selected}"
+				selection="#{listOrganizationController.selected}"
 				animate="true">
 				<p:treeNode id="treeNode">
 					<h:outputText value="#{o.name}" />
 				</p:treeNode>
 			</p:tree>
+			
+			<p:commandButton value="Agregar"
+					action="#{listOrganizationController.newOrganization()}">
+				<f:setPropertyActionListener target="#{listOrganizationController.selected}" value="#{null}" />
+			</p:commandButton>
 
-			<p:dialog id="organizationDialog" header="Guardar Organización"
-				resizable="false" widgetVar="organizationDialog" draggable="true">
-				<p:outputPanel id="organizationForm">
-					<p:panelGrid columns="2"
-						rendered="#{!empty updateOrganizationsBean.organization}">
-						<p:outputLabel value="Padre" />
-						<p:outputLabel
-							value="#{updateOrganizationsBean.organization.parentsString}"
-							rendered="#{!empty updateOrganizationsBean.organization.parent}" />
-						<p:outputLabel value="Nombre" />
-						<p:inputText value="#{updateOrganizationsBean.organization.name}" />
-					</p:panelGrid>
-					<p:commandButton value="GUARDAR"
-						action="#{updateOrganizationsBean.saveOrganization()}" />
-				</p:outputPanel>
-			</p:dialog>
 		</h:form>
 	</ui:define>
 

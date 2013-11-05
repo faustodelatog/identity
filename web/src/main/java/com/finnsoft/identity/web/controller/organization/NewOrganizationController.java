@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.finnsoft.identity.web.controller.resource;
+package com.finnsoft.identity.web.controller.organization;
 
 import java.io.Serializable;
 
@@ -11,8 +11,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.finnsoft.identity.core.exception.EntityNotFoundException;
-import com.finnsoft.identity.core.model.Resource;
-import com.finnsoft.identity.core.service.Resources;
+import com.finnsoft.identity.core.model.Organization;
+import com.finnsoft.identity.core.service.Organizations;
 import com.finnsoft.identity.web.controller.util.BaseController;
 import com.finnsoft.identity.web.controller.util.FacesMessageHelper;
 import com.finnsoft.viewscope.ViewScoped;
@@ -23,17 +23,17 @@ import com.finnsoft.viewscope.ViewScoped;
  */
 @Named
 @ViewScoped
-public class NewResourceController extends BaseController implements
+public class NewOrganizationController extends BaseController implements
 		Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private Resources resources;
+	private Organizations organizations;
 
 	@Named
 	@Produces
-	private Resource newResource = new Resource();
+	private Organization newOrganization = new Organization();
 
 	private String parentParameterName = "parentId";
 
@@ -44,32 +44,32 @@ public class NewResourceController extends BaseController implements
 		if (parentIdString != null) {
 			try {
 				Long parentId = Long.valueOf(parentIdString);
-				newResource.setParent(resources.findById(parentId));
+				newOrganization.setParent(organizations.findById(parentId));
 			} catch (NumberFormatException e) {
 				FacesMessageHelper.addError(String.format(
 						"Se esperaba el parametro %s como número",
 						parentParameterName), e.getMessage());
-				newResource = null;
+				newOrganization = null;
 			} catch (EntityNotFoundException e) {
 				FacesMessageHelper.addError(e.getMessage());
-				newResource = null;
+				newOrganization = null;
 			}
 		}
 	}
 
 	public String save() {
-		resources.save(newResource);
-		FacesMessageHelper.addInfo(String.format("Nuevo recurso creado: %s",
-				newResource.getName()));
-		return "/pages/resource/list?faces-redirect=true";
+		organizations.save(newOrganization);
+		FacesMessageHelper.addInfo(String.format(
+				"Nueva organización creada: %s", newOrganization.getName()));
+		return "/pages/organization/list?faces-redirect=true";
 	}
 
-	public Resource getNewResource() {
-		return newResource;
+	public Organization getNewOrganization() {
+		return newOrganization;
 	}
 
-	public void setNewResource(Resource newResource) {
-		this.newResource = newResource;
+	public void setNewOrganization(Organization newOrganization) {
+		this.newOrganization = newOrganization;
 	}
 
 }

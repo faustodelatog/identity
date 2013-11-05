@@ -5,33 +5,25 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
 
-	<ui:define name="title">Modificar Recurso</ui:define>
+	<ui:define name="title">Modificar Organización</ui:define>
 	<ui:define name="content">
 		<h:form id="form">
 			<p:outputPanel
-				rendered="#{!empty updateResourceController.updateResource}">
+				rendered="#{!empty updateOrganizationController.updateOrganization}">
 				<h:panelGrid columns="2">
 
 					<p:outputLabel value="Padre" />
-					<p:outputLabel value="#{updateResource.parentsString}" />
+					<p:outputLabel value="#{updateOrganization.parentsString}" />
 
 					<p:outputLabel value="Nombre" />
-					<p:inputText value="#{updateResource.name}" required="true"
+					<p:inputText value="#{updateOrganization.name}" required="true"
 						requiredMessage="Ingrese el nombre" />
-
-					<p:outputLabel value="Url" />
-					<p:inputText value="#{updateResource.url}" required="true"
-						requiredMessage="Ingrese la url" />
-
-					<p:outputLabel value="Visible" />
-					<p:selectBooleanButton onLabel="si" offLabel="no"
-						value="#{updateResource.visible}" />
 				</h:panelGrid>
 				<p:commandButton value="Guardar"
-					action="#{updateResourceController.save()}" />
+					action="#{updateOrganizationController.save()}" />
 			</p:outputPanel>
 			<p:commandButton value="Cancelar" process="@this"
-				 action="/pages/resource/list" />
+				 action="/pages/organization/list" />
 		</h:form>
 	</ui:define>
 

@@ -23,7 +23,7 @@ import com.finnsoft.viewscope.ViewScoped;
  */
 @Named
 @ViewScoped
-public class UpdateOrganizationsBean implements Serializable {
+public class ListOrganizationController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -32,15 +32,12 @@ public class UpdateOrganizationsBean implements Serializable {
 
 	private TreeNode root;
 
-	private Organization organization;
-
 	private TreeNode selected;
 
 	@PostConstruct
 	public void init() {
 		root = new DefaultTreeNode("root", null);
-		Long parentId = null; // TODO falta obtener mediante la sesion
-		buildTree(root, organizations.findByParent(parentId));
+		buildTree(root, organizations.findByParent(null));
 	}
 
 	private void buildTree(TreeNode parentNode, List<Organization> children) {
@@ -50,29 +47,23 @@ public class UpdateOrganizationsBean implements Serializable {
 		}
 	}
 
-	public void addOrganization() {
-		organization = new Organization((Organization) selected.getData());
+	public String newOrganization() {
+		if (selected == null) {
+			return "/pages/organization/new?faces-redirect=true";
+		}
+		return String.format(
+				"/pages/organization/new?parentId=%sfaces-redirect=true",
+				((Organization) selected.getData()).getId());
 	}
 
-	public void assignToModify() {
-		organization = (Organization) selected.getData();
-	}
-
-	public String saveOrganization() {
-		organizations.save(organization);
-		return "/pages/organization/list?faces-redirect=true";
+	public String updateOrganization() {
+		return String.format(
+				"/pages/organization/update?id=%sfaces-redirect=true",
+				((Organization) selected.getData()).getId());
 	}
 
 	public TreeNode getRoot() {
 		return root;
-	}
-
-	public Organization getOrganization() {
-		return organization;
-	}
-
-	public void setOrganization(Organization organization) {
-		this.organization = organization;
 	}
 
 	public TreeNode getSelected() {

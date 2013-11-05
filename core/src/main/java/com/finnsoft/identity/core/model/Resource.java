@@ -44,7 +44,7 @@ public class Resource implements Serializable {
 	private String url;
 
 	@Column
-	private Boolean visible;
+	private boolean visible;
 
 	@ManyToOne
 	@JoinColumn(name = "parent_id")
@@ -74,11 +74,11 @@ public class Resource implements Serializable {
 		this.url = url;
 	}
 
-	public Boolean getVisible() {
+	public boolean getVisible() {
 		return visible;
 	}
 
-	public void setVisible(Boolean visible) {
+	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}
 
@@ -97,13 +97,13 @@ public class Resource implements Serializable {
 	}
 
 	public String getParentsString() {
-		return builParentsString(parent).substring(2);
+		return parent == null ? "" : builParentsString(parent).substring(2);
 
 	}
 
 	private String builParentsString(Resource r) {
 		if (r == null) {
-			return " > ";
+			return "";
 		}
 		return builParentsString(r.getParent()) + " > " + r.getName();
 	}

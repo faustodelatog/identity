@@ -19,7 +19,7 @@ public class FacesMessageHelper {
 	}
 
 	public static void addError(final String summary) {
-		addFacesMessage(FacesMessage.SEVERITY_ERROR, summary, summary);
+		addFacesMessage(FacesMessage.SEVERITY_ERROR, summary, "");
 	}
 
 	public static void addInfo(final String summary, String detail) {
@@ -27,7 +27,7 @@ public class FacesMessageHelper {
 	}
 
 	public static void addInfo(final String summary) {
-		addFacesMessage(FacesMessage.SEVERITY_INFO, summary, summary);
+		addFacesMessage(FacesMessage.SEVERITY_INFO, summary, "");
 	}
 
 	private static void addFacesMessage(final Severity severity,
