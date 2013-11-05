@@ -4,7 +4,6 @@
 package com.finnsoft.identity.core.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -13,7 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -21,6 +21,9 @@ import javax.validation.constraints.NotNull;
  * 
  */
 @Entity
+@NamedQueries({
+		@NamedQuery(name = "Resource.findByParent", query = "select r from Resource r where r.parent.id = ?1"),
+		@NamedQuery(name = "Resource.findParents", query = "select r from Resource r where r.parent is null") })
 public class Resource implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -46,9 +49,6 @@ public class Resource implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "parent_id")
 	private Resource parent;
-
-	@OneToMany(mappedBy = "parent")
-	private List<Resource> children;
 
 	public Long getId() {
 		return id;
@@ -90,12 +90,22 @@ public class Resource implements Serializable {
 		this.parent = parent;
 	}
 
-	public List<Resource> getChildren() {
-		return children;
+	@Override
+	public String toString() {
+		return String.format("[ID: %s, Padre: %s, Nombre: %s]", id,
+				getParentsString(), name);
 	}
 
-	public void setChildren(List<Resource> children) {
-		this.children = children;
+	public String getParentsString() {
+		return builParentsString(parent).substring(2);
+
+	}
+
+	private String builParentsString(Resource r) {
+		if (r == null) {
+			return " > ";
+		}
+		return builParentsString(r.getParent()) + " > " + r.getName();
 	}
 
 }

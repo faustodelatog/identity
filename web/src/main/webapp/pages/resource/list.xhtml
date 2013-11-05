@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+
+	<ui:define name="title">Listado de Recursos</ui:define>
+	<ui:define name="content">
+		<h:form id="form">
+			<p:contextMenu for="tree">
+				<p:menuitem value="Agregar"
+					action="#{listResourceController.newResource()}" />
+				<p:menuitem value="Editar"
+					action="#{listResourceController.updateResource()}" />
+			</p:contextMenu>
+
+			<p:tree value="#{listResourceController.root}" var="r" id="tree"
+				selectionMode="single" 
+				selection="#{listResourceController.selected}"
+				animate="true">
+				<p:treeNode id="treeNode">
+					<h:outputText value="#{r.name}" />
+				</p:treeNode>
+			</p:tree>
+			
+			<p:commandButton value="Agregar"
+					action="#{listResourceController.newResource()}">
+				<f:setPropertyActionListener target="#{listResourceController.selected}" value="#{null}" />
+			</p:commandButton>
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>

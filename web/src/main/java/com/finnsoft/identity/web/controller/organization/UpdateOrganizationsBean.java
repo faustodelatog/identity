@@ -38,7 +38,6 @@ public class UpdateOrganizationsBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		System.out.println("aaaaaaaaaa");
 		root = new DefaultTreeNode("root", null);
 		Long parentId = null; // TODO falta obtener mediante la sesion
 		buildTree(root, organizations.findByParent(parentId));

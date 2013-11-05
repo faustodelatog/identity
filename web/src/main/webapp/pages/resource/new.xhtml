@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+
+	<ui:define name="title">Nuevo Recurso</ui:define>
+	<ui:define name="content">
+		<h:form id="form">
+			<h:panelGrid columns="2">
+				
+				<p:outputLabel value="Padre" />
+				<p:outputLabel value="#{newResource.parentsString}" />
+				
+				<p:outputLabel value="Nombre" />
+				<p:inputText value="#{newResource.name}" />
+				
+				<p:outputLabel value="Url" />
+				<p:inputText value="#{newResource.url}" />
+				
+				<p:outputLabel value="Visible" />
+				<p:selectBooleanCheckbox onLabel="SI" offLabel="NO" value="#{newResource.visible}" />
+			</h:panelGrid>
+			<p:commandButton value="Guardar" action="#{newResourceController.save()}" />
+		</h:form>
+	</ui:define>
+
+</ui:composition>

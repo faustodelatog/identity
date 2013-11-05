@@ -20,6 +20,10 @@ public class GenericEao<T> {
 	@PersistenceContext
 	protected EntityManager em;
 
+	public T findById(Class<T> type, Object id) {
+		return em.find(type, id);
+	}
+
 	public void persist(T o) {
 		em.persist(o);
 	}
