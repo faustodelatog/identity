@@ -9,7 +9,7 @@
 	<ui:define name="content">
 		<h:form id="form">
 			<p:outputPanel rendered="#{!empty newOrganizationController.newOrganization}">
-				<h:panelGrid columns="2">
+				<p:panelGrid columns="2">
 					
 					<p:outputLabel value="Padre" />
 					<p:outputLabel value="#{newOrganization.parentsString}" />
@@ -18,7 +18,7 @@
 					<p:inputText value="#{newOrganization.name}"
 						required="true" requiredMessage="Ingrese el nombre" />
 					
-				</h:panelGrid>
+				</p:panelGrid>
 				<p:commandButton value="Guardar" action="#{newOrganizationController.save()}" />
 			</p:outputPanel>
 			<p:commandButton value="Cancelar" process="@this"

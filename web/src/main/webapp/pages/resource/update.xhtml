@@ -10,7 +10,7 @@
 		<h:form id="form">
 			<p:outputPanel
 				rendered="#{!empty updateResourceController.updateResource}">
-				<h:panelGrid columns="2">
+				<p:panelGrid columns="2">
 
 					<p:outputLabel value="Padre" />
 					<p:outputLabel value="#{updateResource.parentsString}" />
@@ -26,7 +26,7 @@
 					<p:outputLabel value="Visible" />
 					<p:selectBooleanButton onLabel="si" offLabel="no"
 						value="#{updateResource.visible}" />
-				</h:panelGrid>
+				</p:panelGrid>
 				<p:commandButton value="Guardar"
 					action="#{updateResourceController.save()}" />
 			</p:outputPanel>

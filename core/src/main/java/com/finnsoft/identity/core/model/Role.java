@@ -9,8 +9,11 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
@@ -19,6 +22,7 @@ import javax.validation.constraints.NotNull;
  * 
  */
 @Entity
+@NamedQueries({ @NamedQuery(name = "Role.findAll", query = "select r from Role r") })
 public class Role implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -38,7 +42,7 @@ public class Role implements Serializable {
 	@Basic(optional = false)
 	private String description;
 
-	@OneToMany(mappedBy = "role")
+	@OneToMany(mappedBy = "role", fetch = FetchType.EAGER, orphanRemoval = true)
 	private List<Permission> permissionList;
 
 	@OneToMany(mappedBy = "role")

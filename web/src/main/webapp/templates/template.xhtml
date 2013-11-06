@@ -42,11 +42,9 @@
 		<p:ajaxStatus onstart="state.show();" onsuccess="state.hide();" />
 		<p:dialog modal="true" widgetVar="state" draggable="false"
 			showHeader="false" resizable="false" closable="false">
-			<h:panelGrid columns="2">
-				<p:graphicImage value="/resources/img/loader.gif" />
-			</h:panelGrid>
+			<p:graphicImage value="/resources/img/loader.gif" />
 		</p:dialog>
-		
+
 		<ui:insert name="content">
 			Contenido
 		</ui:insert>
