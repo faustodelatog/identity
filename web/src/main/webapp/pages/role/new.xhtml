@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+
+	<ui:define name="title">Nuevo Rol</ui:define>
+	<ui:define name="content">
+		<h:form id="form">
+			<p:outputPanel rendered="#{!empty newRoleController.newRole}">
+				<p:panelGrid columns="2">
+					
+					<p:outputLabel value="Nombre" />
+					<p:inputText value="#{newRole.name}"
+						required="true" requiredMessage="Ingrese el nombre" />
+					
+					<p:outputLabel value="Descripción" />
+					<p:inputTextarea value="#{newRole.description}"
+						required="true" requiredMessage="Ingrese la descripción" />
+					
+				</p:panelGrid>
+				<p:commandButton value="Guardar" action="#{newRoleController.save()}" />
+			</p:outputPanel>
+			<p:commandButton value="Cancelar" process="@this"
+				action="/pages/role/list" />
+		</h:form>
+	</ui:define>
+
+</ui:composition>
