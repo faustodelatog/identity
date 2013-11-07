@@ -11,6 +11,8 @@
 			<p:contextMenu for="roleTable">
 				<p:menuitem value="Editar"
 					action="#{listRoleController.updateRole()}" />
+				<p:menuitem value="Permisos"
+					action="#{listRoleController.updateRolePermissions()}" />
 			</p:contextMenu>
 	
 			<p:dataTable id="roleTable" value="#{listRoleController.list}" 

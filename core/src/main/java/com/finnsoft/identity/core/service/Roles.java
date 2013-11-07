@@ -9,6 +9,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import com.finnsoft.identity.core.exception.EntityNotFoundException;
+import com.finnsoft.identity.core.model.Permission;
 import com.finnsoft.identity.core.model.Role;
 import com.finnsoft.identity.core.model.eao.GenericEao;
 
@@ -28,6 +29,16 @@ public class Roles {
 		} else {
 			roleEao.merge(role);
 		}
+	}
+
+	public void updatePermissions(Long id, List<Long> resourceList)
+			throws EntityNotFoundException {
+		Role role = findById(id);
+		role.getPermissionList().clear();
+		for (Long resourceId : resourceList) {
+			role.getPermissionList().add(new Permission(resourceId));
+		}
+		roleEao.merge(role);
 	}
 
 	public List<Role> findAll() {

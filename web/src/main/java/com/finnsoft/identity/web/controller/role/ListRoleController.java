@@ -46,6 +46,12 @@ public class ListRoleController extends BaseController implements Serializable {
 				selected.getId());
 	}
 
+	public String updateRolePermissions() {
+		return String.format(
+				"/pages/role/permissionList?id=%sfaces-redirect=true",
+				selected.getId());
+	}
+
 	public List<Role> getList() {
 		return list;
 	}

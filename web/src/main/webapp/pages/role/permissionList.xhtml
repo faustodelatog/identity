@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+
+	<ui:define name="title">Asignación de Permisos a Rol</ui:define>
+	<ui:define name="content">
+		<h:form id="form">
+			<p:outputPanel rendered="#{!empty listPermissionController.role}">
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Nombre" />
+					<p:outputLabel value="#{listPermissionController.role.name}" />
+				</h:panelGrid>
+
+				<p:tree value="#{listPermissionController.root}" var="r" id="tree"
+					selectionMode="checkbox"
+					selection="#{listPermissionController.selectedResources}"
+					animate="true">
+					<p:treeNode id="treeNode">
+						<h:outputText value="#{r.name}" />
+					</p:treeNode>
+				</p:tree>
+
+				<p:commandButton value="Guardar"
+					action="#{listPermissionController.save()}" />
+
+			</p:outputPanel>
+			<p:commandButton value="Cancelar" process="@this"
+				action="/pages/role/list" />
+		</h:form>
+	</ui:define>
+
+</ui:composition>

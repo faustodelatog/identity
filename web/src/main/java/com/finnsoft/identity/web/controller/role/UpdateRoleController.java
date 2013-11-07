@@ -52,7 +52,7 @@ public class UpdateRoleController extends BaseController implements
 
 	public String save() {
 		roles.save(updateRole);
-		FacesMessageHelper.addInfo(String.format("Nuevo rol creado: %s",
+		FacesMessageHelper.addInfo(String.format("Rol actualizado: %s",
 				updateRole.getName()));
 		return "/pages/role/list?faces-redirect=true";
 	}
