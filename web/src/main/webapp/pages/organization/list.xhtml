@@ -13,6 +13,8 @@
 					action="#{listOrganizationController.newOrganization()}" />
 				<p:menuitem value="Editar"
 					action="#{listOrganizationController.updateOrganization()}" />
+				<p:menuitem value="Usuarios"
+					action="#{listOrganizationController.viewUsers()}" />
 			</p:contextMenu>
 
 			<p:tree value="#{listOrganizationController.root}" var="o" id="tree"

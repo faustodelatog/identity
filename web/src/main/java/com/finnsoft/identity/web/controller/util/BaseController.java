@@ -5,7 +5,7 @@ package com.finnsoft.identity.web.controller.util;
 
 import javax.faces.context.FacesContext;
 
-import com.finnsoft.identity.web.controller.WrongParameterTypeException;
+import com.finnsoft.identity.web.controller.exception.WrongParameterTypeException;
 
 /**
  * @author faustodelatog

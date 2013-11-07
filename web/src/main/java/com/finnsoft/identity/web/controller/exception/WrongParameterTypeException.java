@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.finnsoft.identity.web.controller;
+package com.finnsoft.identity.web.controller.exception;
 
 /**
  * @author faustodelatog

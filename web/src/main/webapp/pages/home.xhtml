@@ -10,12 +10,14 @@
 	<ui:define name="content">
 	
 	<h:form>
-		<p:commandButton value="ALGO"
-		update="ppaa"></p:commandButton>
-		
-		<p:outputPanel id="ppaa">
-			<h:outputText value="Hola" />
-		</p:outputPanel>
+		<p:commandLink value="Organizaciones" action="/pages/resource/list?faces-redirect=true" />
+		<br />
+		<p:commandLink value="Roles" action="/pages/role/list?faces-redirect=true" />
+		<br />
+		<p:commandLink value="Recursos" action="/pages/resource/list?faces-redirect=true" />
+		<br />
+		<p:commandLink value="Usuarios" action="/pages/user/list?faces-redirect=true" />
+		<br />
 	</h:form>	
 	</ui:define>
 

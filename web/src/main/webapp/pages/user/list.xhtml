@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+
+	<ui:define name="title">Listado de Usuarios</ui:define>
+	<ui:define name="content">
+		<h:form id="form">
+			<p:contextMenu for="usersTable">
+				<p:menuitem value="Editar"
+					action="#{listUserController.updateUser()}" />
+			</p:contextMenu>
+	
+			<p:dataTable id="usersTable" value="#{listUserController.list}" 
+				var="u" rowKey="#{u.id}"
+				scrollable="true" scrollRows="20"
+				selectionMode="single" 
+				selection="#{listUserController.selected}">
+				
+				<p:column filterBy="username" headerText="Nombre de Usuario"
+					filterMatchMode="contains">
+					<h:outputText value="#{u.username}" />
+				</p:column>
+				<p:column filterBy="email" headerText="Email"
+					filterMatchMode="contains">
+					<h:outputText value="#{u.email}" />
+				</p:column>
+				<p:column sortBy="type" headerText="Tipo">
+					<h:outputText value="#{u.type}" />
+				</p:column>
+				
+			</p:dataTable>		
+
+			<p:commandButton value="Agregar BDD"
+				action="#{listUserController.newUser('db')}" />
+			<p:commandButton value="Agregar Ldap"
+				action="#{listUserController.newUser('ldap')}" />
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>

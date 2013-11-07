@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+
+	<ui:define name="title">Nuevo Usuario Ldap</ui:define>
+	<ui:define name="content">
+		<h:form id="form">
+			<p:outputPanel rendered="#{!empty newLdapUser}">
+				<p:panelGrid columns="2">
+					
+					<p:outputLabel value="Nombre de Usuario" />
+					<p:inputText value="#{newLdapUser.username}"
+						required="true" requiredMessage="Ingrese el Nombre de Usuario" />
+					
+					<p:outputLabel value="Email" />
+					<p:inputText value="#{newLdapUser.email}"
+						required="true" requiredMessage="Ingrese el email" />
+					
+				</p:panelGrid>
+				<p:commandButton value="Guardar" action="#{newLdapUserController.save()}" />
+			</p:outputPanel>
+			<p:commandButton value="Cancelar" process="@this"
+				action="/pages/user/list?faces-redirect=true" />
+		</h:form>
+	</ui:define>
+
+</ui:composition>

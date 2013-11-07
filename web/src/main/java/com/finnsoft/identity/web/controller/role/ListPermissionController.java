@@ -20,7 +20,7 @@ import com.finnsoft.identity.core.model.Resource;
 import com.finnsoft.identity.core.model.Role;
 import com.finnsoft.identity.core.service.Resources;
 import com.finnsoft.identity.core.service.Roles;
-import com.finnsoft.identity.web.controller.WrongParameterTypeException;
+import com.finnsoft.identity.web.controller.exception.WrongParameterTypeException;
 import com.finnsoft.identity.web.controller.util.BaseController;
 import com.finnsoft.identity.web.controller.util.FacesMessageHelper;
 import com.finnsoft.viewscope.ViewScoped;

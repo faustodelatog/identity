@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+
+	<ui:define name="title">Listado de Usuarios en Organización</ui:define>
+	<ui:define name="content">
+		<h:form id="form">
+			<p:contextMenu for="usersTable">
+				<p:menuitem value="Roles"
+					action="#{userListOrganizationController.updateGrants()}" />
+			</p:contextMenu>
+		
+			<p:dataTable id="usersTable" value="#{userListOrganizationController.users}" 
+				var="u"
+				scrollable="true" scrollRows="20"
+				stickyHeader="true"
+				selectionMode="single" 
+				selection="#{userListOrganizationController.selected}">
+				
+				<p:column filterBy="username" headerText="Nombre de Usuario"
+					filterMatchMode="contains">
+					<h:outputText value="#{u.user.username}" />
+				</p:column>
+				<p:column filterBy="email" headerText="Email"
+					filterMatchMode="contains">
+					<h:outputText value="#{u.user.email}" />
+				</p:column>
+			</p:dataTable>
+			<p:commandButton value="Age" />
+		</h:form>
+	</ui:define>
+
+</ui:composition>

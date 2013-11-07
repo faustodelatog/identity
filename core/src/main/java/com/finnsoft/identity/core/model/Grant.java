@@ -5,6 +5,7 @@ package com.finnsoft.identity.core.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author faustodelatog
@@ -28,13 +30,14 @@ public class Grant implements Serializable {
 	@Column
 	private Long id;
 
-	@ManyToOne(optional = false)
-	@JoinColumn(name = "role_id")
+	@ManyToOne
+	@JoinColumn(name = "role_id", nullable = false, insertable = false, updatable = false)
 	private Role role;
 
-	@ManyToOne(optional = false)
-	@JoinColumn(name = "user_organization_id")
-	private UserOrganization userOrganization;
+	@Column(name = "role_id")
+	@NotNull(message = "El rol del grant es requerido")
+	@Basic(optional = false)
+	private Long roleId;
 
 	public Long getId() {
 		return id;
@@ -52,11 +55,11 @@ public class Grant implements Serializable {
 		this.role = role;
 	}
 
-	public UserOrganization getUserOrganization() {
-		return userOrganization;
+	public Long getRoleId() {
+		return roleId;
 	}
 
-	public void setUserOrganization(UserOrganization userOrganization) {
-		this.userOrganization = userOrganization;
+	public void setRoleId(Long roleId) {
+		this.roleId = roleId;
 	}
 }

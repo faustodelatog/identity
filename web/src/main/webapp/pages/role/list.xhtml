@@ -17,6 +17,7 @@
 	
 			<p:dataTable id="roleTable" value="#{listRoleController.list}" 
 				var="r" rowKey="#{r.id}"
+				scrollable="true" scrollRows="20"
 				selectionMode="single" 
 				selection="#{listRoleController.selected}">
 				

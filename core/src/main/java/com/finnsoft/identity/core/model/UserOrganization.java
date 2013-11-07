@@ -7,12 +7,16 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 /**
@@ -20,6 +24,7 @@ import javax.persistence.OneToMany;
  * 
  */
 @Entity
+@NamedQueries({ @NamedQuery(name = "UserOrganization.findByOrganization", query = "select uo from UserOrganization uo where uo.organizationId = ?1") })
 public class UserOrganization implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -34,12 +39,16 @@ public class UserOrganization implements Serializable {
 	@Basic(optional = false)
 	private User user;
 
-	@ManyToOne(optional = false)
-	@Basic(optional = false)
-	@JoinColumn(name = "organization_id")
+	@ManyToOne
+	@JoinColumn(name = "organization_id", updatable = false, insertable = false)
 	private Organization organization;
 
-	@OneToMany(mappedBy = "userOrganization")
+	@Basic(optional = false)
+	@Column(name = "organization_id")
+	private Long organizationId;
+
+	@OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_organization_id", nullable = false)
 	private List<Grant> grantList;
 
 	public Long getId() {
@@ -72,6 +81,14 @@ public class UserOrganization implements Serializable {
 
 	public void setGrantList(List<Grant> grantList) {
 		this.grantList = grantList;
+	}
+
+	public Long getOrganizationId() {
+		return organizationId;
+	}
+
+	public void setOrganizationId(Long organizationId) {
+		this.organizationId = organizationId;
 	}
 
 }

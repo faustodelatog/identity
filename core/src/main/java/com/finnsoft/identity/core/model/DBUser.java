@@ -14,8 +14,8 @@ import javax.validation.constraints.NotNull;
  * 
  */
 @Entity
-@DiscriminatorValue("S")
-public class SimpleUser extends User {
+@DiscriminatorValue("B")
+public class DBUser extends User {
 
 	private static final long serialVersionUID = 1L;
 
@@ -30,5 +30,10 @@ public class SimpleUser extends User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	@Override
+	public String getType() {
+		return "BDD";
 	}
 }

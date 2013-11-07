@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -21,6 +23,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Inheritance
 @DiscriminatorColumn(name = "type")
+@NamedQueries({ @NamedQuery(name = "User.findAll", query = "select u from User u") })
 public abstract class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -63,4 +66,6 @@ public abstract class User implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public abstract String getType();
 }

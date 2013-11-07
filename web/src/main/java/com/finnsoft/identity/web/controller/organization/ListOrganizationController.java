@@ -56,6 +56,12 @@ public class ListOrganizationController implements Serializable {
 				((Organization) selected.getData()).getId());
 	}
 
+	public String viewUsers() {
+		return String.format(
+				"/pages/organization/user/list?id=%sfaces-redirect=true",
+				((Organization) selected.getData()).getId());
+	}
+
 	public String updateOrganization() {
 		return String.format(
 				"/pages/organization/update?id=%sfaces-redirect=true",
