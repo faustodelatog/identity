@@ -13,6 +13,7 @@ import javax.inject.Named;
 import com.finnsoft.identity.core.exception.EntityNotFoundException;
 import com.finnsoft.identity.core.model.Role;
 import com.finnsoft.identity.core.service.Roles;
+import com.finnsoft.identity.web.controller.WrongParameterTypeException;
 import com.finnsoft.identity.web.controller.util.BaseController;
 import com.finnsoft.identity.web.controller.util.FacesMessageHelper;
 import com.finnsoft.viewscope.ViewScoped;
@@ -39,18 +40,12 @@ public class UpdateRoleController extends BaseController implements
 
 	@PostConstruct
 	public void init() {
-		String roleIdString = getRequestParameter(roleParameterName);
-
 		try {
-			Long roleId = Long.valueOf(roleIdString);
+			Long roleId = getRequestParameterAsLong(roleParameterName);
 			if (roleId != null) {
 				updateRole = roles.findById(roleId);
 			}
-		} catch (NumberFormatException e) {
-			FacesMessageHelper.addError(String.format(
-					"Se esperaba el parametro %s como número",
-					roleParameterName), e.getMessage());
-		} catch (EntityNotFoundException e) {
+		} catch (WrongParameterTypeException | EntityNotFoundException e) {
 			FacesMessageHelper.addError(e.getMessage());
 		}
 	}
