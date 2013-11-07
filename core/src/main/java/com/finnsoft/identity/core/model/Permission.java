@@ -48,9 +48,6 @@ public class Permission implements Serializable {
 	@Basic(optional = false)
 	private Role role;
 
-	@Column
-	private Boolean recursive;
-
 	public Long getId() {
 		return id;
 	}
@@ -81,14 +78,6 @@ public class Permission implements Serializable {
 
 	public void setRole(Role role) {
 		this.role = role;
-	}
-
-	public Boolean getRecursive() {
-		return recursive;
-	}
-
-	public void setRecursive(Boolean recursive) {
-		this.recursive = recursive;
 	}
 
 }
