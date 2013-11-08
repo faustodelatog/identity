@@ -26,7 +26,7 @@ public class Organizations {
 		Organization o = organizationEao.findById(Organization.class, id);
 		if (o == null) {
 			throw new EntityNotFoundException(String.format(
-					"No se encontro un recurso con id %s", id));
+					"No se encontro una organización con id %s", id));
 		}
 		return o;
 	}

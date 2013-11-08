@@ -8,50 +8,61 @@
 	<ui:define name="title">Listado de Usuarios en Organización</ui:define>
 	<ui:define name="content">
 		<h:form id="form">
-			<p:contextMenu for="usersTable">
-				<p:menuitem value="Roles"
-					action="#{userListOrganizationController.updateGrants()}" />
-			</p:contextMenu>
-		
-			<p:dataTable id="usersTable" value="#{userListOrganizationController.organizationUsers}" 
-				var="u" rowKey="#{u.id}"
-				scrollable="true" scrollRows="20"
-				stickyHeader="true"
-				selectionMode="single" 
-				selection="#{userListOrganizationController.selected}">
+			<p:outputPanel
+				rendered="#{!empty userListOrganizationController.organization}">
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Organización Padre" />
+					<p:outputLabel value="#{userListOrganizationController.organization.parentsString}" />
+					<p:outputLabel value="Organización" />
+					<p:outputLabel value="#{userListOrganizationController.organization.name}" />
+				</h:panelGrid>
 				
-				<p:column filterBy="username" headerText="Nombre de Usuario"
-					filterMatchMode="contains">
-					<h:outputText value="#{u.user.username}" />
-				</p:column>
-				<p:column filterBy="email" headerText="Email"
-					filterMatchMode="contains">
-					<h:outputText value="#{u.user.email}" />
-				</p:column>
-			</p:dataTable>
-			
-			<br />
-			<p:contextMenu for="availableUsersTable">
-				<p:menuitem value="Agregar"
-					action="#{userListOrganizationController.addUserToOrganization()}" />
-			</p:contextMenu>
-			
-			<p:dataTable id="availableUsersTable" value="#{userListOrganizationController.availableUsers}" 
-				var="u" rowKey="#{u.id}"
-				scrollable="true" scrollRows="20"
-				stickyHeader="true"
-				selectionMode="single" 
-				selection="#{userListOrganizationController.userToAdd}">
-				
-				<p:column filterBy="username" headerText="Nombre de Usuario"
-					filterMatchMode="contains">
-					<h:outputText value="#{u.username}" />
-				</p:column>
-				<p:column filterBy="email" headerText="Email"
-					filterMatchMode="contains">
-					<h:outputText value="#{u.email}" />
-				</p:column>
-			</p:dataTable>
+				<p:contextMenu for="usersTable">
+					<p:menuitem value="Roles"
+						action="#{userListOrganizationController.updateGrants()}" />
+				</p:contextMenu>
+
+				<p:dataTable id="usersTable"
+					value="#{userListOrganizationController.organizationUsers}" var="u"
+					rowKey="#{u.id}" scrollable="true" scrollRows="20"
+					selectionMode="single"
+					selection="#{userListOrganizationController.selected}">
+
+					<p:column filterBy="user.username" headerText="Nombre de Usuario"
+						filterMatchMode="contains">
+						<h:outputText value="#{u.user.username}" />
+					</p:column>
+					<p:column filterBy="user.email" headerText="Email"
+						filterMatchMode="contains">
+						<h:outputText value="#{u.user.email}" />
+					</p:column>
+				</p:dataTable>
+
+				<br />
+				<p:contextMenu for="availableUsersTable">
+					<p:menuitem value="Agregar"
+						action="#{userListOrganizationController.addUserToOrganization()}" />
+				</p:contextMenu>
+
+				<p:dataTable id="availableUsersTable"
+					value="#{userListOrganizationController.availableUsers}" var="u"
+					rowKey="#{u.id}" scrollable="true" scrollRows="20"
+					selectionMode="single"
+					selection="#{userListOrganizationController.userToAdd}">
+
+					<p:column filterBy="username" headerText="Nombre de Usuario"
+						filterMatchMode="contains">
+						<h:outputText value="#{u.username}" />
+					</p:column>
+					<p:column filterBy="email" headerText="Email"
+						filterMatchMode="contains">
+						<h:outputText value="#{u.email}" />
+					</p:column>
+					<p:column sortBy="type" headerText="Tipo">
+						<h:outputText value="#{u.type}" />
+					</p:column>
+				</p:dataTable>
+			</p:outputPanel>
 		</h:form>
 	</ui:define>
 
