@@ -23,7 +23,9 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Inheritance
 @DiscriminatorColumn(name = "type")
-@NamedQueries({ @NamedQuery(name = "User.findAll", query = "select u from User u") })
+@NamedQueries({
+		@NamedQuery(name = "User.findAll", query = "select u from User u"),
+		@NamedQuery(name = "User.findNotInOrganization", query = "select u from User u where u.id not in (select uo.user.id from UserOrganization uo where uo.organizationId = ?1)") })
 public abstract class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;

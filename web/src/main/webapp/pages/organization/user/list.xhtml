@@ -13,8 +13,8 @@
 					action="#{userListOrganizationController.updateGrants()}" />
 			</p:contextMenu>
 		
-			<p:dataTable id="usersTable" value="#{userListOrganizationController.users}" 
-				var="u"
+			<p:dataTable id="usersTable" value="#{userListOrganizationController.organizationUsers}" 
+				var="u" rowKey="#{u.id}"
 				scrollable="true" scrollRows="20"
 				stickyHeader="true"
 				selectionMode="single" 
@@ -29,7 +29,29 @@
 					<h:outputText value="#{u.user.email}" />
 				</p:column>
 			</p:dataTable>
-			<p:commandButton value="Age" />
+			
+			<br />
+			<p:contextMenu for="availableUsersTable">
+				<p:menuitem value="Agregar"
+					action="#{userListOrganizationController.addUserToOrganization()}" />
+			</p:contextMenu>
+			
+			<p:dataTable id="availableUsersTable" value="#{userListOrganizationController.availableUsers}" 
+				var="u" rowKey="#{u.id}"
+				scrollable="true" scrollRows="20"
+				stickyHeader="true"
+				selectionMode="single" 
+				selection="#{userListOrganizationController.userToAdd}">
+				
+				<p:column filterBy="username" headerText="Nombre de Usuario"
+					filterMatchMode="contains">
+					<h:outputText value="#{u.username}" />
+				</p:column>
+				<p:column filterBy="email" headerText="Email"
+					filterMatchMode="contains">
+					<h:outputText value="#{u.email}" />
+				</p:column>
+			</p:dataTable>
 		</h:form>
 	</ui:define>
 

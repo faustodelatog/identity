@@ -42,4 +42,9 @@ public class Users {
 		}
 		return u;
 	}
+
+	public List<User> findUsersNotInOrganization(Long organizationId) {
+		return userEao.getResultListFromNamedQuery(User.class,
+				"User.findNotInOrganization", organizationId);
+	}
 }
