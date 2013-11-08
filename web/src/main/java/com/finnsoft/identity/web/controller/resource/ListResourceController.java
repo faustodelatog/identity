@@ -52,12 +52,13 @@ public class ListResourceController implements Serializable {
 			return "/pages/resource/new?faces-redirect=true";
 		}
 		return String.format(
-				"/pages/resource/new?parentId=%sfaces-redirect=true",
+				"/pages/resource/new?parentId=%s&faces-redirect=true",
 				((Resource) selected.getData()).getId());
 	}
 
 	public String updateResource() {
-		return String.format("/pages/resource/update?id=%sfaces-redirect=true",
+		return String.format(
+				"/pages/resource/update?id=%s&faces-redirect=true",
 				((Resource) selected.getData()).getId());
 	}
 

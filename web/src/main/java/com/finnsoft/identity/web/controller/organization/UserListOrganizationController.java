@@ -72,7 +72,9 @@ public class UserListOrganizationController extends BaseController implements
 	}
 
 	public String updateGrants() {
-		return null;
+		return String
+				.format("/pages/grant/list?userId=%s&organizationId=%s&faces-redirect=true",
+						selected.getUserId(), organization.getId());
 	}
 
 	public String addUserToOrganization() {
@@ -80,7 +82,7 @@ public class UserListOrganizationController extends BaseController implements
 			userOrganizations.addUserOrganization(userToAdd.getId(),
 					organization.getId());
 			return String.format(
-					"/pages/organization/user/list?id=%sfaces-redirect=true",
+					"/pages/organization/user/list?id=%s&faces-redirect=true",
 					organization.getId());
 		} catch (AddUserOrganizationException e) {
 			FacesMessageHelper.addError(e.getMessage());

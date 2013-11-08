@@ -17,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -50,6 +51,9 @@ public class Role implements Serializable {
 
 	@OneToMany(mappedBy = "role")
 	private List<RoleAssignment> roleAssignmentList;
+
+	@Transient
+	private boolean selected;
 
 	public Long getId() {
 		return id;
@@ -89,5 +93,13 @@ public class Role implements Serializable {
 
 	public void setRoleAssignmentList(List<RoleAssignment> roleAssignmentList) {
 		this.roleAssignmentList = roleAssignmentList;
+	}
+
+	public boolean isSelected() {
+		return selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
 	}
 }

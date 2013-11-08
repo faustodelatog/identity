@@ -9,6 +9,8 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import com.finnsoft.identity.core.exception.AddUserOrganizationException;
+import com.finnsoft.identity.core.exception.EntityNotFoundException;
+import com.finnsoft.identity.core.model.Grant;
 import com.finnsoft.identity.core.model.UserOrganization;
 import com.finnsoft.identity.core.model.eao.GenericEao;
 
@@ -42,5 +44,32 @@ public class UserOrganizations {
 		}
 		UserOrganization uo = new UserOrganization(userId, organizationId);
 		userOrganizationEao.persist(uo);
+	}
+
+	public void updateGrants(Long userId, Long organizationId,
+			List<Long> roleList) throws EntityNotFoundException {
+		UserOrganization uo = findByUserAndOrganization(userId, organizationId);
+		if (uo == null) {
+			throw new EntityNotFoundException(String.format(
+					"El usuario %s no se encuentra en la organización %s",
+					userId, organizationId));
+		}
+		uo.getGrantList().clear();
+		for (Long roleId : roleList) {
+			uo.getGrantList().add(new Grant(roleId));
+		}
+		userOrganizationEao.merge(uo);
+	}
+
+	public UserOrganization findByUserAndOrganization(Long userId,
+			Long organizationId) {
+		List<UserOrganization> list = userOrganizationEao
+				.getResultListFromNamedQuery(UserOrganization.class,
+						"UserOrganization.findByUserOrganization", userId,
+						organizationId);
+		if (list.isEmpty()) {
+			return null;
+		}
+		return list.get(0);
 	}
 }

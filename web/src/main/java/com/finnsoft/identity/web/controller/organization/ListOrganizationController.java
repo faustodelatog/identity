@@ -52,19 +52,19 @@ public class ListOrganizationController implements Serializable {
 			return "/pages/organization/new?faces-redirect=true";
 		}
 		return String.format(
-				"/pages/organization/new?parentId=%sfaces-redirect=true",
+				"/pages/organization/new?parentId=%s&faces-redirect=true",
 				((Organization) selected.getData()).getId());
 	}
 
 	public String viewUsers() {
 		return String.format(
-				"/pages/organization/user/list?id=%sfaces-redirect=true",
+				"/pages/organization/user/list?id=%s&faces-redirect=true",
 				((Organization) selected.getData()).getId());
 	}
 
 	public String updateOrganization() {
 		return String.format(
-				"/pages/organization/update?id=%sfaces-redirect=true",
+				"/pages/organization/update?id=%s&faces-redirect=true",
 				((Organization) selected.getData()).getId());
 	}
 

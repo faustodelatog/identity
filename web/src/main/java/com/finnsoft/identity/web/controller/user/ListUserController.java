@@ -46,7 +46,7 @@ public class ListUserController extends BaseController implements Serializable {
 	public String updateUser() {
 		String type = selected instanceof DBUser ? "db"
 				: selected instanceof LdapUser ? "ldap" : null;
-		return String.format("/pages/user/%s/update?id=%sfaces-redirect=true",
+		return String.format("/pages/user/%s/update?id=%s&faces-redirect=true",
 				type, selected.getId());
 	}
 

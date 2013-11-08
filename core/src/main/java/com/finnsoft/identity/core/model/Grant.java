@@ -39,6 +39,14 @@ public class Grant implements Serializable {
 	@Basic(optional = false)
 	private Long roleId;
 
+	public Grant() {
+	}
+
+	public Grant(Long roleId) {
+		super();
+		this.roleId = roleId;
+	}
+
 	public Long getId() {
 		return id;
 	}

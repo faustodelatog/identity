@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+
+	<ui:define name="title">Asignación de Roles a Usuario</ui:define>
+	<ui:define name="content">
+		<h:form id="form">
+			<p:outputPanel rendered="#{!empty updateGrantsUserOrganization.userOrganization}">
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Organización Padre" />
+					<p:outputLabel value="#{updateGrantsUserOrganization.userOrganization.organization.parentsString}" />
+					<p:outputLabel value="Organización" />
+					<p:outputLabel value="#{updateGrantsUserOrganization.userOrganization.organization.name}" />
+					<p:outputLabel value="Usuario" />
+					<p:outputLabel value="#{updateGrantsUserOrganization.userOrganization.user.username}" />
+				</h:panelGrid>
+
+				<p:dataTable value="#{updateGrantsUserOrganization.roleList}"
+					var="r" scrollable="true" scrollRows="20">
+					<p:column headerText="">
+						<p:selectBooleanCheckbox value="#{r.selected}" />
+					</p:column>
+					<p:column headerText="Rol">
+						<p:outputLabel value="#{r.name}" />
+					</p:column>
+				</p:dataTable>
+
+				<p:commandButton value="Guardar"
+					action="#{updateGrantsUserOrganization.save()}" />
+
+			</p:outputPanel>
+			<p:commandButton value="Cancelar" process="@this"
+				action="#{updateGrantsUserOrganization.cancel()}" />
+		</h:form>
+	</ui:define>
+
+</ui:composition>
